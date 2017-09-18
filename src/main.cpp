@@ -2,6 +2,7 @@
 #include <QFileSystemWatcher>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QtWidgets>
 
 #include "utils.h"
 #ifdef DEVELOP_MODE
@@ -11,8 +12,9 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
+    QApplication app(argc, argv);
+    QWidget window;
+    QQmlApplicationEngine engine(&window);
 
 #if defined(DEVELOP_MODE)
     qDebug() << "DEVELOP_MODE=ON";
@@ -42,6 +44,17 @@ int main(int argc, char *argv[])
     qDebug() << "DEVELOP_MODE=OFF";
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 #endif
+
+//    QMainWindow *main = qobject_cast<QMainWindow *>(engine.rootObjects().first());
+
+    QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
+    m_logDock->setObjectName("log");
+    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+//    m_logDock->show();
+//    main->addDockWidget(Qt::BottomDockWidgetArea, m_logDock);
+    m_logDock->show();
+    qDebug() << m_logDock->widget();
 
     if (engine.rootObjects().isEmpty())
         return -1;

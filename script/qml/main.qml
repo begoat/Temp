@@ -7,6 +7,7 @@ ApplicationWindow {
     width: 600
     height: 400
     title: qsTr("Game Center Dev")
+    objectName: qsTr("mainWindow")
 
     property alias headerItemAlias: header.item
     property alias contentItemAlias: content.item

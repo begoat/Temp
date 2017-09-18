@@ -16,12 +16,12 @@ configure_file (
         "${PROJECT_BINARY_DIR}/utils.h"
 )
 
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick Widgets REQUIRED)
 
 if(DEVELOP_MODE)
-	add_executable(${PROJECT_NAME} "src/main.cpp" "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h")
+    add_executable(${PROJECT_NAME} "src/main.cpp" "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h" "script/qml/qml.qrc")
 else()
 	add_executable(${PROJECT_NAME} "src/main.cpp" "script/qml/qml.qrc")
 endif()
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Quick)
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Quick Qt5::Widgets)

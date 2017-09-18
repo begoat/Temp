@@ -17,6 +17,8 @@ void WatchReload::reload()
         this->headerObj->setProperty("active",false);
         this->contentObj->setProperty("active",false);
         this->engine->clearComponentCache();
+        // 这里需要 调整一下 还是 弄成绝对路径好了
+        // 这里的相对路径会用到 编译目录 不太方便
         this->headerObj->setProperty("source","../script/qml/HeaderComponent.qml");
         this->contentObj->setProperty("source","../script/qml/ContentComponent.qml");
         this->engine->clearComponentCache();
