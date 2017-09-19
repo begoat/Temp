@@ -67,14 +67,25 @@ int main(int argc, char *argv[])
 
     QWidget *container = QWidget::createWindowContainer(qmlWindow);
     qDebug() << container;
-    container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
+    container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height()+30);
 
     QWidget *widget = new QWidget();
-    //QMainWindow *mainwindow = new QMainWindow();
     QGridLayout *grid = new QGridLayout(widget);
     grid->addWidget(container,0,0);
 
-    QDockWidget *m_logDock = new QDockWidget("test");
+    QDockWidget *m_logDock = new QDockWidget("Log Output");
+    m_logDock->setObjectName("log");
+    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+
+    QWidget window;
+    window.resize(320,240);
+    window.setWindowTitle(QApplication::translate("toplevel", "Top-level widget"));
+
+    m_logDock->setWidget(&window);
+
+
+
     grid->addWidget(m_logDock,1,0);
     widget->show();
 
