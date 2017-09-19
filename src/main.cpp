@@ -50,9 +50,7 @@ int main(int argc, char *argv[])
     qDebug() << container;
     container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
 
-
     QWidget *widget = new QWidget();
-
     // create a layout
     QGridLayout *grid = new QGridLayout(widget);
     grid->addWidget(container,0,0);

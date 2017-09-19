@@ -20,7 +20,7 @@ find_package(Qt5 COMPONENTS Core Quick Widgets Gui REQUIRED)
 
 set(executable_file ${executable_file}
     "src/main.cpp"
-    "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
+    "src/watchreload/watchreload.h" "src/watchreload/watchreload.cpp"
     "src/logview/logger.h" "src/logview/logger.cpp"
     "src/logview/logview.h" "src/logview/logview.cpp"
     "src/logview/qmllive_global.h"
