@@ -3,11 +3,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 ApplicationWindow {
-    visible: true
+    visible: false // 为什么 设置成false 就 出来了
     width: 600
     height: 400
     title: qsTr("Game Center Dev")
-    objectName: qsTr("mainWindow")
+    objectName: qsTr("TESTWIN")
 
     property alias headerItemAlias: header.item
     property alias contentItemAlias: content.item

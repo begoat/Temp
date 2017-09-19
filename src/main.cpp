@@ -13,8 +13,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
-    QWidget window;
-    QQmlApplicationEngine engine(&window);
+//    QWidget window;
+//    QMainWindow window;
+//    QQmlApplicationEngine engine(&window);
+    QQmlApplicationEngine engine;
 
 #if defined(DEVELOP_MODE)
     qDebug() << "DEVELOP_MODE=ON";
@@ -45,16 +47,38 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 #endif
 
-//    QMainWindow *main = qobject_cast<QMainWindow *>(engine.rootObjects().first());
+//    QWidget *main = qobject_cast<QWidget*>(engine.rootObjects().first());
+//    qDebug() << main;
 
-    QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
-    m_logDock->setObjectName("log");
-    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+//    mainwindow.setCentralWidget(main);
+//    qDebug() << mainwindow.centralWidget();
+
+//    QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
+//    m_logDock->setObjectName("log");
+//    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+//    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+////    m_logDock->show();
+////    main->addDockWidget(Qt::BottomDockWidgetArea, m_logDock);
 //    m_logDock->show();
-//    main->addDockWidget(Qt::BottomDockWidgetArea, m_logDock);
-    m_logDock->show();
-    qDebug() << m_logDock->widget();
+//    qDebug() << m_logDock->widget();
+
+    QWindow *qmlWindow = qobject_cast<QWindow*>(engine.rootObjects().first());
+    qDebug() << qmlWindow;
+
+    QWidget *container = QWidget::createWindowContainer(qmlWindow);
+    qDebug() << container;
+    container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
+
+    QWidget *widget = new QWidget();
+    //QMainWindow *mainwindow = new QMainWindow();
+    QGridLayout *grid = new QGridLayout(widget);
+    grid->addWidget(container,0,0);
+
+    //QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
+
+    grid->addWidget(new QDockWidget("demo"),1,0);
+    widget->show();
+
 
     if (engine.rootObjects().isEmpty())
         return -1;
