@@ -77,9 +77,9 @@ int main(int argc, char *argv[])
     m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
 
-    //    LogView *m_log;
-    m_logDock->setWidget(new QPlainTextEdit("This is a test"));
-
+    LogView *m_log = new LogView(true,m_logDock);
+    //m_logDock->setWidget(new QPlainTextEdit("This is a test"));
+    m_logDock->setWidget(m_log);
     grid->addWidget(m_logDock,1,0);
     widget->show();
 
