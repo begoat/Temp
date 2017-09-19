@@ -18,7 +18,7 @@ Item {
         Page {
             Button {
                 onClicked: {
-                    console.log("You clicked once")
+                    console.log("You clicked Third")
                     popup.open()
                 }
                 Popup {

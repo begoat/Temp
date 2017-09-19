@@ -42,8 +42,12 @@ int main(int argc, char *argv[])
     WatchReload reloader(&engine);
     QObject::connect(&filewatcher,&QFileSystemWatcher::directoryChanged,&reloader,&WatchReload::reload);
 
+    // ================================
+
     // get pointer to ApplicationWindow
-    QWindow *qmlWindow = qobject_cast<QWindow*>(engine.rootObjects().first());
+    QObject *rootObject = engine.rootObjects().first();
+    rootObject->setProperty("visible",false); //only in this way can the window be shown correctly
+    QWindow *qmlWindow = qobject_cast<QWindow*>(rootObject);
 
     // create window container
     QWidget *container = QWidget::createWindowContainer(qmlWindow);
