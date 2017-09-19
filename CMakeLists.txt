@@ -18,9 +18,17 @@ configure_file (
 
 find_package(Qt5 COMPONENTS Core Quick Widgets Gui REQUIRED)
 
+set(executable_file ${executable_file}
+    "src/main.cpp"
+    "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
+    "src/logview/logger.h" "src/logview/logger.cpp"
+    "src/logview/logview.h" "src/logview/logview.cpp"
+    "src/logview/qmllive_global.h"
+    "script/qml/qml.qrc"
+)
+
 if(DEVELOP_MODE)
-    add_executable(${PROJECT_NAME} "src/main.cpp" "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
-        "src/logview/logger.h" "src/logview/logger.cpp" "src/logview/logview.cpp" "src/logview/logview.h" "src/logview/qmllive_global.h" "script/qml/qml.qrc")
+    add_executable(${PROJECT_NAME} ${executable_file})
 else()
     add_executable(${PROJECT_NAME} "src/main.cpp" "script/qml/qml.qrc")
 endif()
