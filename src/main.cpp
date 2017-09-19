@@ -74,9 +74,8 @@ int main(int argc, char *argv[])
     QGridLayout *grid = new QGridLayout(widget);
     grid->addWidget(container,0,0);
 
-    //QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
-
-    grid->addWidget(new QDockWidget("demo"),1,0);
+    QDockWidget *m_logDock = new QDockWidget("test");
+    grid->addWidget(m_logDock,1,0);
     widget->show();
 
 
