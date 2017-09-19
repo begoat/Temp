@@ -56,8 +56,6 @@ int main(int argc, char *argv[])
 
     QWidget *widget = new QWidget();
     // create a layout
-    QGridLayout *grid = new QGridLayout(widget);
-    grid->addWidget(container,0,0);
 
     QDockWidget *m_logDock = new QDockWidget("Log Output");
     m_logDock->setObjectName("log");
@@ -65,7 +63,14 @@ int main(int argc, char *argv[])
     m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
     LogView *m_log = new LogView(true); // This is embeded widget
     m_logDock->setWidget(m_log);
-    grid->addWidget(m_logDock,1,0); // place the widget to the top of the widget
+
+    QSplitter *splitter = new QSplitter;
+    splitter->addWidget(container);
+    splitter->addWidget(m_logDock);
+    splitter->setOrientation(Qt::Vertical);
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(splitter);
+    widget->setLayout(layout);
     widget->show();
 
 #else
