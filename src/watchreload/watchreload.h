@@ -1,6 +1,3 @@
-#ifndef WatchReload_H
-#define WatchReload_H
-
 #include <QQmlApplicationEngine>
 
 class WatchReload : public QObject
@@ -18,5 +15,3 @@ private:
     QObject *headerObj;
     QObject *contentObj;
 };
-
-#endif

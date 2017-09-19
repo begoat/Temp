@@ -5,6 +5,8 @@
 #include <QtWidgets>
 
 #include "utils.h"
+#include "logview/logview.h"
+
 #ifdef DEVELOP_MODE
 #include "watchreload/watchreload.h"
 #endif
@@ -67,7 +69,7 @@ int main(int argc, char *argv[])
 
     QWidget *container = QWidget::createWindowContainer(qmlWindow);
     qDebug() << container;
-    container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height()+30);
+    container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
 
     QWidget *widget = new QWidget();
     QGridLayout *grid = new QGridLayout(widget);
@@ -77,15 +79,8 @@ int main(int argc, char *argv[])
     m_logDock->setObjectName("log");
     m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
-
-    QWidget window;
-    window.resize(320,240);
-    window.setWindowTitle(QApplication::translate("toplevel", "Top-level widget"));
-
-    m_logDock->setWidget(&window);
-
-
-
+    LogView *m_log;
+    m_logDock->setWidget(m_log);
     grid->addWidget(m_logDock,1,0);
     widget->show();
 

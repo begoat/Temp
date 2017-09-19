@@ -17,7 +17,10 @@ Item {
 
         Page {
             Button {
-                onClicked: popup.open()
+                onClicked: {
+                    console.log("You clicked once")
+                    popup.open()
+                }
                 Popup {
                     id: popup
                     parent: ApplicationWindow.overlay
