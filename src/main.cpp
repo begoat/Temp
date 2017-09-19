@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
-//    QWidget window;
-//    QMainWindow window;
-//    QQmlApplicationEngine engine(&window);
+    //    QWidget window;
+    //    QMainWindow window;
+    //    QQmlApplicationEngine engine(&window);
     QQmlApplicationEngine engine;
 
 #if defined(DEVELOP_MODE)
@@ -44,25 +44,22 @@ int main(int argc, char *argv[])
     // a function as a slot to receive and react to the signal
     WatchReload reloader(&engine);
     QObject::connect(&filewatcher,&QFileSystemWatcher::directoryChanged,&reloader,&WatchReload::reload);
-#else
-    qDebug() << "DEVELOP_MODE=OFF";
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-#endif
 
-//    QWidget *main = qobject_cast<QWidget*>(engine.rootObjects().first());
-//    qDebug() << main;
 
-//    mainwindow.setCentralWidget(main);
-//    qDebug() << mainwindow.centralWidget();
+    //    QWidget *main = qobject_cast<QWidget*>(engine.rootObjects().first());
+    //    qDebug() << main;
 
-//    QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
-//    m_logDock->setObjectName("log");
-//    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-//    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
-////    m_logDock->show();
-////    main->addDockWidget(Qt::BottomDockWidgetArea, m_logDock);
-//    m_logDock->show();
-//    qDebug() << m_logDock->widget();
+    //    mainwindow.setCentralWidget(main);
+    //    qDebug() << mainwindow.centralWidget();
+
+    //    QDockWidget *m_logDock = new QDockWidget("test",&window,Qt::Dialog);
+    //    m_logDock->setObjectName("log");
+    //    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    //    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+    ////    m_logDock->show();
+    ////    main->addDockWidget(Qt::BottomDockWidgetArea, m_logDock);
+    //    m_logDock->show();
+    //    qDebug() << m_logDock->widget();
 
     QWindow *qmlWindow = qobject_cast<QWindow*>(engine.rootObjects().first());
     qDebug() << qmlWindow;
@@ -79,11 +76,17 @@ int main(int argc, char *argv[])
     m_logDock->setObjectName("log");
     m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
-    LogView *m_log;
-    m_logDock->setWidget(m_log);
+
+    //    LogView *m_log;
+    m_logDock->setWidget(new QPlainTextEdit("This is a test"));
+
     grid->addWidget(m_logDock,1,0);
     widget->show();
 
+#else
+    qDebug() << "DEVELOP_MODE=OFF";
+    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+#endif
 
     if (engine.rootObjects().isEmpty())
         return -1;
