@@ -1,14 +1,13 @@
 #include <QDebug>
 #include <QFileSystemWatcher>
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtWidgets>
 
 #include "utils.h"
 
 #ifdef DEVELOP_MODE
-#include "logview/logview.h"
 #include "watchreload/watchreload.h"
+#include "logview/keydock.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -57,16 +56,11 @@ int main(int argc, char *argv[])
     QWidget *widget = new QWidget();
     // create a layout
 
-    QDockWidget *m_logDock = new QDockWidget("Log Output");
-    m_logDock->setObjectName("log");
-    m_logDock->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-    m_logDock->setFeatures(QDockWidget::AllDockWidgetFeatures);
-    LogView *m_log = new LogView(true); // This is embeded widget
-    m_logDock->setWidget(m_log);
+    KeyDock *keydock = new KeyDock("Log Output");
 
     QSplitter *splitter = new QSplitter;
     splitter->addWidget(container);
-    splitter->addWidget(m_logDock);
+    splitter->addWidget(keydock);
     splitter->setOrientation(Qt::Vertical);
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(splitter);

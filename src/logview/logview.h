@@ -28,6 +28,9 @@
 ** SPDX-License-Identifier: GPL-3.0
 **
 ****************************************************************************/
+#ifndef LOGVIEW_H
+#define LOGVIEW_H
+// add include guard to prevent it being compiled twice
 
 #include <QtCore>
 #include <QtGui>
@@ -35,7 +38,6 @@
 #include <QtWidgets>
 
 #include "logger.h"
-
 
 class LogView : public QWidget
 {
@@ -60,3 +62,5 @@ private:
     QMutex m_mutex;
     Logger* m_logger;
 };
+
+#endif
