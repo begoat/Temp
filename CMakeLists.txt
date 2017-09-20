@@ -23,7 +23,6 @@ set(executable_file ${executable_file}
     "src/watchreload/watchreload.h" "src/watchreload/watchreload.cpp"
     "src/logview/logger.h" "src/logview/logger.cpp"
     "src/logview/logview.h" "src/logview/logview.cpp"
-    "src/logview/keydock.h" "src/logview/keydock.cpp"
     "src/logview/mainwidget.h" "src/logview/mainwidget.cpp"
     "src/logview/qmllive_global.h"
     "script/qml/qml.qrc"

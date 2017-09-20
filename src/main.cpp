@@ -8,7 +8,7 @@
 #ifdef DEVELOP_MODE
 #include "watchreload/watchreload.h"
 #include "logview/mainwidget.h"
-#include "logview/keydock.h"
+#include "logview/logview.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -48,29 +48,38 @@ int main(int argc, char *argv[])
     QObject *rootObject = engine.rootObjects().first();
     rootObject->setProperty("visible",false); //only in this way can the window be shown correctly
     QWindow *qmlWindow = qobject_cast<QWindow*>(rootObject);
-//    QObject *testtest = rootObject->findChild<QObject*>("test");
-//    qDebug() << testtest;
-//    testtest->setProperty("onActivated",'');
+
+    /* not a good idea to affect the key events in qml application window
+    QObject *testtest = rootObject->findChild<QObject*>("test");
+    qDebug() << testtest;
+    testtest->setProperty("onActivated",'');
+    */
 
     // create window container
     QWidget *container = QWidget::createWindowContainer(qmlWindow);
     qDebug() << container;
     container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
 
-    // QWidget *widget = new QWidget();
-    MainWidget *widget = new MainWidget();
+    // new mainwindow widget
+    MainWidget *mainwidget = new MainWidget();
+
+    // a DockWidget wrap a log widget got from qmllive-qt
+    QDockWidget *console = new QDockWidget("Application Output");
+    LogView *app_log = new LogView(true);
+    console->setObjectName("log");
+    console->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    console->setFeatures(QDockWidget::AllDockWidgetFeatures);
+    console->setWidget(app_log);
+
     // create a layout
-
-    KeyDock *keydock = new KeyDock("Log Output");
-
     QSplitter *splitter = new QSplitter;
     splitter->addWidget(container);
-    splitter->addWidget(keydock);
+    splitter->addWidget(console);
     splitter->setOrientation(Qt::Vertical);
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(splitter);
-    widget->setLayout(layout);
-    widget->show();
+    mainwidget->setLayout(layout);
+    mainwidget->show();
 
 #else
     qDebug() << "DEVELOP_MODE=OFF";
