@@ -7,14 +7,5 @@ KeyDock::KeyDock(const QString &title): QDockWidget(title){
     this->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     this->setFeatures(QDockWidget::AllDockWidgetFeatures);
     this->setWidget(m_log);
-    event = new QKeyEvent(QEvent::KeyPress,Qt::Key_F3,Qt::NoModifier);
 }
 
-void KeyDock::keyPressEvent(QKeyEvent *event){
-    if (event->type() == QEvent::KeyPress){
-        QKeyEvent *kevent = (QKeyEvent *)event;
-        if (kevent->key() == Qt::Key_F3){
-            qDebug() << "!!!!!";
-        }
-    }
-}

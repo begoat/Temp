@@ -7,6 +7,7 @@
 
 #ifdef DEVELOP_MODE
 #include "watchreload/watchreload.h"
+#include "logview/mainwidget.h"
 #include "logview/keydock.h"
 #endif
 
@@ -47,13 +48,17 @@ int main(int argc, char *argv[])
     QObject *rootObject = engine.rootObjects().first();
     rootObject->setProperty("visible",false); //only in this way can the window be shown correctly
     QWindow *qmlWindow = qobject_cast<QWindow*>(rootObject);
+//    QObject *testtest = rootObject->findChild<QObject*>("test");
+//    qDebug() << testtest;
+//    testtest->setProperty("onActivated",'');
 
     // create window container
     QWidget *container = QWidget::createWindowContainer(qmlWindow);
     qDebug() << container;
     container->setMinimumSize(qmlWindow->size().width(), qmlWindow->size().height());
 
-    QWidget *widget = new QWidget();
+    // QWidget *widget = new QWidget();
+    MainWidget *widget = new MainWidget();
     // create a layout
 
     KeyDock *keydock = new KeyDock("Log Output");

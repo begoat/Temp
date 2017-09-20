@@ -7,7 +7,12 @@ ApplicationWindow {
     width: 600
     height: 400
     title: qsTr("Game Center Dev")
-    objectName: qsTr("TestOutput")
+
+//    Shortcut {
+//        objectName: "test"
+//        sequence: "Ctrl+E,Ctrl+W"
+//        context: Qt.ApplicationShortcut
+//    }
 
     property alias headerItemAlias: header.item
     property alias contentItemAlias: content.item

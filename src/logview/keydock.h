@@ -7,7 +7,4 @@ class KeyDock : public QDockWidget
 
 public:
     KeyDock(const QString &title);
-protected:
-    virtual void keyPressEvent(QKeyEvent *event);
-    QKeyEvent *event;
 };

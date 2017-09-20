@@ -9,8 +9,11 @@ TabBar {
     anchors.bottom: header.bottom
     TabButton {
         text: qsTr("First")
+        Keys.onLeftPressed: {
+            console.log("validate the shortcut outside didn't affect the Application Window")
+        }
     }
     TabButton {
-        text: qsTr("Second")
+        text: qsTr("Second")    
     }
 }
