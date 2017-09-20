@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     // a DockWidget wrap a log widget got from qmllive-qt
     QDockWidget *console = new QDockWidget("Application Output");
     LogView *app_log = new LogView(true);
-    console->setObjectName("log");
+    console->setObjectName("logoutput");
     console->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     console->setFeatures(QDockWidget::AllDockWidgetFeatures);
     console->setWidget(app_log);

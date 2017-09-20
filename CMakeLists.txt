@@ -27,7 +27,6 @@ set(executable_file ${executable_file}
     "src/logview/qmllive_global.h"
     "script/qml/qml.qrc"
 )
-# "src/logview/logview.h" "src/logview/logview.cpp 搞懂为啥不要他
 if(DEVELOP_MODE)
     add_executable(${PROJECT_NAME} ${executable_file})
 else()
