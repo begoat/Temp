@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import DevItem 1.0
 
 ApplicationWindow {
     visible: true
@@ -38,5 +39,22 @@ ApplicationWindow {
             value: if (content.status == Loader.Ready) content.item.currentIndex
             when: header.status === Loader.Ready
         }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+L"
+        onActivated: curtain.clearlog()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+M"
+        onActivated: curtain.hidelog()
+    }
+
+    Curtain {
+        id: curtain
+        anchors.fill: parent
+        opacity: 0.6
+        visible: false
     }
 }

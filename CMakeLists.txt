@@ -23,6 +23,8 @@ if(DEVELOP_MODE)
         "src/main.cpp" "script/qml/qml.qrc"
         "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
         "src/myitem/curtain.h" "src/myitem/curtain.cpp"
+        "src/log/logger.h" "src/log/logger.cpp"
+        "src/log/qmllive_global.h"
         )
 else()
 	add_executable(${PROJECT_NAME} "src/main.cpp" "script/qml/qml.qrc")

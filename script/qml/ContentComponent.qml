@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-import DevItem 1.0
 
 Item {
     // don't forget to expose the internal property using alias if you want you use it as a component
@@ -10,14 +9,33 @@ Item {
         id: swipeView
         anchors.fill: parent
         Page {
-            Curtain {
-                anchors.fill: parent
+            TextField {
+                id: textField1
+                anchors.left: parent.left
+                placeholderText: qsTr("Text Field")
+            }
+
+            Button {
+
+                id: button1
+                anchors.right: parent.right
+                text: qsTr("Press Me")
+                onClicked: {
+                    console.log("Button Pressed. Entered text: " + textField1.text);
+                }
+            }
+            Label {
+                text: qsTr("Second page")
+                anchors.centerIn: parent
             }
         }
 
         Page {
             Button {
-                onClicked: popup.open()
+                onClicked: {
+                    console.log("trigger the popup")
+                    popup.open()
+                }
                 Popup {
                     id: popup
                     parent: ApplicationWindow.overlay
@@ -28,5 +46,6 @@ Item {
                 }
             }
         }
+
     }
 }
