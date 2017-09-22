@@ -19,8 +19,11 @@ configure_file (
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 if(DEVELOP_MODE)
-    add_executable(${PROJECT_NAME} "src/main.cpp" "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
-        "script/qml/qml.qrc")
+    add_executable(${PROJECT_NAME}
+        "src/main.cpp" "script/qml/qml.qrc"
+        "src/watchreload/watchreload.cpp" "src/watchreload/watchreload.h"
+        "src/myitem/curtain.h" "src/myitem/curtain.cpp"
+        )
 else()
 	add_executable(${PROJECT_NAME} "src/main.cpp" "script/qml/qml.qrc")
 endif()

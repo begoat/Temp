@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import DevItem 1.0
 
 Item {
     // don't forget to expose the internal property using alias if you want you use it as a component
@@ -9,9 +10,8 @@ Item {
         id: swipeView
         anchors.fill: parent
         Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
+            Curtain {
+                anchors.fill: parent
             }
         }
 

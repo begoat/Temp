@@ -5,12 +5,16 @@
 
 #include "utils.h"
 #ifdef DEVELOP_MODE
+#include "myitem/curtain.h"
 #include "watchreload/watchreload.h"
 #endif
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    qmlRegisterType<Curtain>("DevItem", 1, 0, "Curtain");
+
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
@@ -38,6 +42,7 @@ int main(int argc, char *argv[])
     // a function as a slot to receive and react to the signal
     WatchReload reloader(&engine);
     QObject::connect(&filewatcher,&QFileSystemWatcher::directoryChanged,&reloader,&WatchReload::reload);
+
 #else
     qDebug() << "DEVELOP_MODE=OFF";
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
