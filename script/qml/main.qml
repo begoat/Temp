@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import qmllive.logger 1.0
 
 ApplicationWindow {
     visible: true
@@ -39,4 +40,25 @@ ApplicationWindow {
             when: header.status === Loader.Ready
         }
     }
+
+    //    Shortcut {
+    //        sequence: "Ctrl+M"
+    //        onActivated: curtain.hidelog()
+    //    } //默认设置为不可见
+
+    TextEdit {
+        id:curtain
+        focus: false
+        activeFocusOnPress: false
+        selectByMouse: false
+        selectByKeyboard: false
+        cursorVisible: false
+//        contentWidth:
+        readOnly: true
+        wrapMode: TextEdit.WrapAnywhere // 需要调整一下 怎么 弄 才 不让他 出界
+        Logger {
+            onMessage: curtain.append(msg)
+        }
+    }
+
 }

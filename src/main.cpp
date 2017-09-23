@@ -6,6 +6,7 @@
 #include "utils.h"
 #ifdef DEVELOP_MODE
 #include "watchreload/watchreload.h"
+#include "logconsole/logger.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -34,6 +35,9 @@ int main(int argc, char *argv[])
     confFilePath.append("/qtquickcontrols2.conf");
     mainQmlPath.append("/main.qml");
     qputenv("QT_QUICK_CONTROLS_CONF", (confFilePath).toUtf8());
+
+    qmlRegisterType<Logger>("qmllive.logger", 1, 0, "Logger");
+
     engine.load(QUrl(mainQmlPath));
     // a function as a slot to receive and react to the signal
     WatchReload reloader(&engine);
