@@ -33,7 +33,7 @@ ApplicationWindow {
         source: "ContentComponent.qml"
         objectName: "content"
         active: true
-        focus: true // should add this because we use FocusScope below which will forward key and mouse to focus: true
+//        focus: true // should add this because we use FocusScope below which will forward key and mouse to focus: true
         Binding {
             target: headerItemAlias
             property: 'currentIndex'
@@ -59,21 +59,47 @@ ApplicationWindow {
         enabled: false
         width: parent.width
         height: parent.height
-        TextEdit {
-            id:logcurtain
+
+        Flickable {
+            id: flickable
             width: parent.width
             height: parent.height
-            focus: false
-            activeFocusOnPress: false
-            cursorVisible: false
-            readOnly: true
-            wrapMode: TextEdit.WordWrap
-            visible: false
-            Connections {
-                target: MyLog.Logger
-                onMessage: logcurtain.append(msg)
+            contentWidth: logcurtain.paintedWidth
+            contentHeight: logcurtain.paintedHeight
+            clip: true
+            function ensureVisible(r)
+            {
+                if (contentX >= r.x)
+                    contentX = r.x;
+                else if (contentX + width <= r.x + r.width)
+                    contentX = r.x + r.width - width;
+                if (contentY >= r.y)
+                    contentY = r.y;
+                else if (contentY + height <= r.y + r.height)
+                    contentY = r.y + r.height - height;
             }
+            TextEdit {
+                id:logcurtain
+                width: flickable.width
+                height: flickable.height
+                focus: false
+                activeFocusOnPress: false
+                cursorVisible: false
+                readOnly: true
+                wrapMode: TextEdit.WordWrap
+//                visible: false
+                visible: true
+                Connections {
+                    target: MyLog.Logger
+                    onMessage: logcurtain.append(msg)
+                }
+                onCursorRectangleChanged: flickable.ensureVisible(cursorRectangle)
+            }
+
+
         }
+
+
     }
 
 
