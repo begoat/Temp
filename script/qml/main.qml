@@ -33,24 +33,11 @@ ApplicationWindow {
         source: "ContentComponent.qml"
         objectName: "content"
         active: true
-//        focus: true // should add this because we use FocusScope below which will forward key and mouse to focus: true
         Binding {
             target: headerItemAlias
             property: 'currentIndex'
             value: if (content.status == Loader.Ready) content.item.currentIndex
             when: header.status === Loader.Ready
-        }
-    }
-
-    Shortcut {
-        sequence: "Ctrl+L"
-        onActivated: logcurtain.clear()
-    }
-
-    Shortcut {
-        sequence: "Ctrl+M"
-        onActivated: {
-            logcurtain.visible = !logcurtain.visible
         }
     }
 
@@ -79,6 +66,7 @@ ApplicationWindow {
                     contentY = r.y + r.height - height;
             }
             TextEdit {
+                opacity: 0.4
                 id:logcurtain
                 width: flickable.width
                 height: flickable.height
@@ -87,22 +75,29 @@ ApplicationWindow {
                 cursorVisible: false
                 readOnly: true
                 wrapMode: TextEdit.WordWrap
-//                visible: false
-                visible: true
+                visible: false
                 Connections {
                     target: MyLog.Logger
                     onMessage: logcurtain.append(msg)
                 }
                 onCursorRectangleChanged: flickable.ensureVisible(cursorRectangle)
             }
-
-
         }
-
-
     }
 
+    Shortcut {
+        sequence: "Ctrl+L"
+        onActivated: logcurtain.clear()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+M"
+        onActivated: {
+            logcurtain.visible = !logcurtain.visible
+        }
+    }
 
 }
+
 
 
