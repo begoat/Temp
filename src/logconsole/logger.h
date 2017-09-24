@@ -44,6 +44,7 @@ class QMLLIVESHARED_EXPORT Logger : public QObject
 public:
     explicit Logger(QObject *parent = 0);
     virtual ~Logger();
+    static Logger* getInstance();
 
 public Q_SLOTS:
     static void setIgnoreMessages(bool ignoreMessages);

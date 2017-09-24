@@ -56,9 +56,14 @@ ApplicationWindow {
 //        contentWidth:
         readOnly: true
         wrapMode: TextEdit.WrapAnywhere // 需要调整一下 怎么 弄 才 不让他 出界
-        Logger {
-            onMessage: curtain.append(msg)
-        }
+//        Logger {
+//            onMessage: curtain.append(msg)
+//        }
+    }
+
+    Connections {
+        target: Logger
+        onMessage: curtain.append("This is atest" + "\n")
     }
 
 }

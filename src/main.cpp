@@ -9,6 +9,8 @@
 #include "logconsole/logger.h"
 #endif
 
+static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine);
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -36,7 +38,8 @@ int main(int argc, char *argv[])
     mainQmlPath.append("/main.qml");
     qputenv("QT_QUICK_CONTROLS_CONF", (confFilePath).toUtf8());
 
-    qmlRegisterType<Logger>("qmllive.logger", 1, 0, "Logger");
+    //qmlRegisterType<Logger>("qmllive.logger", 1, 0, "Logger");
+    qmlRegisterSingletonType<Logger>("qmllive.logger", 1, 0, "Logger", logsingleton);
 
     engine.load(QUrl(mainQmlPath));
     // a function as a slot to receive and react to the signal
@@ -51,4 +54,13 @@ int main(int argc, char *argv[])
         return -1;
 
     return app.exec();
+}
+
+static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+   Logger *instance = new Logger();
+   return instance;
 }

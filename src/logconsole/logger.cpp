@@ -69,6 +69,10 @@ Logger::~Logger()
     qInstallMessageHandler(0);
 }
 
+Logger *Logger::getInstance(){
+    return s_instance;
+}
+
 /*!
  * When \a ignoreMessages set to true, the Logger ignores all incoming log messages
  */
