@@ -18,11 +18,8 @@ void WatchReload::reload()
         QString contentPath = WATCH_DIR_PATH;
         QString headerPath = WATCH_DIR_PATH;
         QString errorPath = WATCH_DIR_PATH;
-<<<<<<< HEAD
-=======
 
         //use absolute path can avoid difference
->>>>>>> 3aa6e6c50b2dd9f6f9f6dbdd3aded13920767fa1
         headerPath.prepend("file:").append("/HeaderComponent.qml");
         contentPath.prepend("file:").append("/ContentComponent.qml");
         errorPath.prepend("file:").append("/ErrorComponent.qml");
