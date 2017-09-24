@@ -7,9 +7,15 @@
 #ifdef DEVELOP_MODE
 #include "watchreload/watchreload.h"
 #include "logconsole/logger.h"
+
+static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine){
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+   return Logger::instance();
+}
 #endif
 
-static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 int main(int argc, char *argv[])
 {
@@ -56,10 +62,4 @@ int main(int argc, char *argv[])
     return app.exec();
 }
 
-static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
 
-   return Logger::instance();
-}

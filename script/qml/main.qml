@@ -45,23 +45,28 @@ ApplicationWindow {
     //        sequence: "Ctrl+M"
     //        onActivated: curtain.hidelog()
     //    } //默认设置为不可见
-
-    TextEdit {
-        id:curtain
+    FocusScope{
         focus: false
-        activeFocusOnPress: false
-        selectByMouse: false
-        selectByKeyboard: false
-        cursorVisible: false
-//        contentWidth:
-        readOnly: true
-        wrapMode: TextEdit.WrapAnywhere // 需要调整一下 怎么 弄 才 不让他 出界
+
+        TextEdit {
+            id:curtain
+            width: parent.width - 100
+            height: parent.height
+            focus: false
+            activeFocusOnPress: false
+            selectByMouse: false
+            selectByKeyboard: false
+            cursorVisible: false
+            readOnly: true
+            wrapMode: TextEdit.WordWrap
+
+            Connections {
+                target: MyLog.Logger
+                onMessage: curtain.append(msg)
+            }
+        }
     }
 
-    Connections {
-        target: MyLog.Logger
-        onMessage: curtain.append("This is atest")
-    }
 
 }
 
