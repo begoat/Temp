@@ -33,6 +33,7 @@ ApplicationWindow {
         source: "ContentComponent.qml"
         objectName: "content"
         active: true
+        focus: true // should add this because we use FocusScope below which will forward key and mouse to focus: true
         Binding {
             target: headerItemAlias
             property: 'currentIndex'
@@ -41,28 +42,36 @@ ApplicationWindow {
         }
     }
 
-    //    Shortcut {
-    //        sequence: "Ctrl+M"
-    //        onActivated: curtain.hidelog()
-    //    } //默认设置为不可见
+    Shortcut {
+        sequence: "Ctrl+L"
+        onActivated: logcurtain.clear()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+M"
+        onActivated: {
+            logcurtain.visible = !logcurtain.visible
+        }
+    }
+
     FocusScope{
         focus: false
-
+        enabled: false
+        width: parent.width
+        height: parent.height
         TextEdit {
-            id:curtain
-            width: parent.width - 100
+            id:logcurtain
+            width: parent.width
             height: parent.height
             focus: false
             activeFocusOnPress: false
-            selectByMouse: false
-            selectByKeyboard: false
             cursorVisible: false
             readOnly: true
             wrapMode: TextEdit.WordWrap
-
+            visible: false
             Connections {
                 target: MyLog.Logger
-                onMessage: curtain.append(msg)
+                onMessage: logcurtain.append(msg)
             }
         }
     }
