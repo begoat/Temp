@@ -57,8 +57,9 @@ Logger::Logger(QObject *parent) :
         qFatal("Cannot create more than one Logger");
     }
     s_instance = this;
-
     qInstallMessageHandler(messageHandler);
+    qDebug() << "Logger created successfully";
+
 }
 
 /*!
@@ -66,6 +67,7 @@ Logger::Logger(QObject *parent) :
  */
 Logger::~Logger()
 {
+//    delete s_instance; // 这句话要不要
     qInstallMessageHandler(0);
 }
 

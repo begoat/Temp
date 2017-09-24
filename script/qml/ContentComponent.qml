@@ -23,7 +23,7 @@ Item {
                 }
             }
             Label {
-                text: qsTr("Second page")
+                text: qsTr("First page")
                 anchors.centerIn: parent
             }
         }
