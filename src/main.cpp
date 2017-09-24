@@ -61,6 +61,5 @@ static QObject *logsingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-   Logger *instance = new Logger();
-   return instance;
+   return Logger::instance();
 }

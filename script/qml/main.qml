@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-import qmllive.logger 1.0
+import qmllive.logger 1.0 as MyLog
 
 ApplicationWindow {
     visible: true
@@ -56,14 +56,13 @@ ApplicationWindow {
 //        contentWidth:
         readOnly: true
         wrapMode: TextEdit.WrapAnywhere // 需要调整一下 怎么 弄 才 不让他 出界
-//        Logger {
-//            onMessage: curtain.append(msg)
-//        }
     }
 
     Connections {
-        target: Logger
-        onMessage: curtain.append("This is atest" + "\n")
+        target: MyLog.Logger
+        onMessage: curtain.append("This is atest")
     }
 
 }
+
+

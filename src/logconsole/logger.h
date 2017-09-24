@@ -32,6 +32,7 @@
 #pragma once
 
 #include <QObject>
+#include <qDebug>
 #include <QMutex>
 #include <QUrl>
 
@@ -40,11 +41,14 @@
 class QMLLIVESHARED_EXPORT Logger : public QObject
 {
     Q_OBJECT
-
 public:
-    explicit Logger(QObject *parent = 0);
-    virtual ~Logger();
-    static Logger* getInstance();
+    ~Logger();
+    static Logger *instance(){
+        if (!s_instance){
+            s_instance = new Logger();
+        }
+        return s_instance;
+    }
 
 public Q_SLOTS:
     static void setIgnoreMessages(bool ignoreMessages);
@@ -53,10 +57,9 @@ Q_SIGNALS:
     void message(int type, const QString &msg, const QUrl &url = QUrl(), int line = -1, int column = -1);
 
 private:
-    static void messageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg);
-
-    static Logger *s_instance;
     static bool s_ignoreMesssages;
-
     static QMutex m_mutex;
+    static Logger *s_instance;
+    explicit Logger(QObject *parent = 0);
+    static void messageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 };
